@@ -2,14 +2,15 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { AppBar } from 'components/AppBar';
 import { Button } from 'components/Button';
-import { Close, KeyboardArrowRight } from "@material-ui/icons";
+import { KeyboardArrowRight } from "@material-ui/icons";
 
 import { ProcessDescriptionHeader } from 'components/ProcessDescriptionHeader';
 import { ProcessPageFooter } from 'components/ProcessPageFooter';
 import { cancelLabel, nextLabel } from "constants/buttons/labels";
 import { useStyle } from "./ConfirmPassword.style";
 import { PasswordInput } from 'feature/onboarding/components/PasswordInput';
-import { PageTitle } from 'feature/onboarding/components/PageTitle';
+import { CloseButton } from 'feature/onboarding/components/CloseButton';
+import "./style.scss";
 
 export const ConfirmPassword: React.FC = () => {
 
@@ -18,8 +19,8 @@ export const ConfirmPassword: React.FC = () => {
 
   const [passwordInput, setPasswordInput] = React.useState("");
 
-  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setPasswordInput(event.target.value);
+  const onPasswordChange = (event: string) =>
+    setPasswordInput(event);
 
   const onCancelButtonClick = () => {
     //history.replace(OnboardingRoutes.activateAccount);
@@ -29,52 +30,54 @@ export const ConfirmPassword: React.FC = () => {
     //history.push(OnboardingRoutes.accountActivationCompletedForCard);
   };
 
-
   return (
     <Container maxWidth="xs" className={style.container}>
-    <div className="main-form">
-      <AppBar
-        homeRoute={homeRoute}
-        action={
-          <Button
-            palette="secondary"
-            size="small"
-            startIcon={<Close color="primary" />}
-            onClick={onCancelButtonClick}
-          >
-            {cancelLabel}
-          </Button>
-        }
-      />
-      <div className="form-body">
+      <div className="main-form">
+        <AppBar
+          homeRoute={homeRoute}
+          action={
+            <Button
+              palette="secondary"
+              size="small"
+              startIcon={<CloseButton />}
+              onClick={onCancelButtonClick}
+            >
+              {cancelLabel}
+            </Button>
+          }
+        />
+
+
         <div className="top">
-          <PageTitle text="Ative sua Conta" />
           <ProcessDescriptionHeader
-            title="Confirme sua senha"
+            title="Ativar conta"
+            subtitle="Confirme sua senha"
             description="Essa senha deve ter 6 dígitos e deve ter ao menos uma letra"
           />
         </div>
+
         <div className="content">
-          <div className="align-top">
-            <PasswordInput
-              label="Confirmar senha"
-              onChange={onPasswordChange}
-              value={passwordInput}
-            />
-          </div>
+          <PasswordInput
+            label="Confirmar senha"
+            onChange={onPasswordChange}
+            value={passwordInput}
+          />
         </div>
+
+        <footer>
+          <ProcessPageFooter
+            primaryButton={
+              <Button
+                endIcon={<KeyboardArrowRight color="secondary" />}
+                onClick={onNextButtonClick}
+              >
+                {nextLabel}
+              </Button>
+            }
+          />
+        </footer>
       </div>
-      <ProcessPageFooter
-        primaryButton={
-          <Button
-            endIcon={<KeyboardArrowRight color="secondary" />}
-            onClick={onNextButtonClick}
-          >
-            {nextLabel}
-          </Button>
-        }
-      />
-    </div>
-  </Container>
+
+    </Container >
   )
 }
