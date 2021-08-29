@@ -50,7 +50,7 @@ export const ConfirmPassword: React.FC = () => {
 
         <div className="top">
           <ProcessDescriptionHeader
-            title="Ativar conta"
+            title="Ative sua conta"
             subtitle="Confirme sua senha"
             description="Essa senha deve ter 6 dígitos e deve ter ao menos uma letra"
           />
