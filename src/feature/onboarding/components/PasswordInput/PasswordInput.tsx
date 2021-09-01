@@ -12,19 +12,17 @@ interface PasswordProps {
 export const PasswordInput = ({ label, value, onChange }: PasswordProps) => {
 
   return (
-    <div className="password-body">
-      <div className="password-content">
-        <Typography className="label-password" color="primary" variant="caption" gutterBottom>
-          <strong>{label}</strong>
-        </Typography>
+      <div className="content-password">
+        
+        <strong>{label}</strong>
+      
         <OtpInput
-          className="password-input"
+          className="input"
           value={value}
           onChange={onChange}
           isInputSecure={true}
           numInputs={6}
         />
       </div>
-    </div>
   );
 };
